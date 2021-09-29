@@ -1,0 +1,66 @@
+
+# spot the simalarity
+# dobble game
+'''
+In this game  
+game will consist of 8 cards
+we will take 2 different card
+with each will carry  8 different symbols
+in both card one symbol will be similar in both
+in this will use alphabet as symbols
+'''
+
+# code section 
+
+
+import string		# to get the all characters 
+import random
+# (String.ascii_letters) # it will return alphabet 
+symbols = []
+symbols = list(string.ascii_letters)
+
+card1 = [0]*8		# declaring card1 size = 5
+card2 = [0]*8		# declaring card2 size = 5
+
+pos1 = random.randint(0,7)
+pos2 = random.randint(0,7)
+# these 2 position will contain same symbol whch will be common in both different card
+#print(pos1)
+#print(pos2)
+same_symbol = random.choice(symbols) 
+symbols.remove(same_symbol) # after we get a symbol common in both the card we will remove it from the source list
+
+	# we use if-else condition here to fillup the common position 
+
+if(pos1 == pos2):
+	card2[pos1] = same_symbol
+	card1[pos1] = same_symbol
+else:
+	card1[pos1] = same_symbol
+	card2[pos2] = same_symbol
+	card1[pos2] = random.choice(symbols)		# we are removing the symbol from symbols which we have utilized
+	symbols.remove(card1[pos2])				# we are removing the symbol from symbols which we have utilized
+	card2[pos1] = random.choice(symbols)
+	symbols.remove(card2[pos1])			# we are removing the symbol from symbols which we have utilized
+	
+	# for filling up rest of the position in the cards
+
+i = 0
+while(i < 8):	
+	if (i != pos1 and i != pos2):			
+		alphabet = random.choice(symbols)   # taking a sample in alphabet veriable to put in card
+		symbols.remove(alphabet)			# we are removing the symbol from symbols which we have utilized
+		card1[i] = alphabet			# pushing the value
+		alphabet = random.choice(symbols)
+		symbols.remove(alphabet)   		# we are removing the symbol from symbols which we have utilized
+		card2[i] = alphabet			# pushing the value
+	i += 1		# incrementing the value of i
+
+print(card1)	# displaying content of card1
+print(card2)	# displaying content of card2
+
+ch = input('Spot the simalar symbol : ')		# asking input from the user for spotting the simalarity
+if (ch == same_symbol):
+	print('CORRECT')          #  for guessing the correct answer
+else:
+	print('WRONG')			  #  for guessing the wrong output
